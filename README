@@ -1,0 +1,75 @@
+***********************
+*** Atmoslog README ***
+***********************
+
+
+DESCRIPTION
+===========
+
+Atmoslog (Atmospheric data logger) is a temperature/humidity logger
+for TEMPerHUM devices.
+
+This program/driver applies to TEMPerHUM USB thermometer devices
+with vendor code "0c45" and product code "7402".
+
+The difference between this program and others is that it uses
+libusb 1.0 which is more stable then libusb 0.1.
+
+
+BUILD and INSTALL
+=================
+
+Prerequirements
+---------------
+
+Install the libusb 1.x and devel packages:
+
+- Debian/Ubuntu:
+$ sudo apt-get install build-essential libusb-1.0-0 libusb-1.0-0-dev
+
+- Fedora/RHEL/CentOS:
+$ sudo yum install -y libusb1 libusb1-devel
+
+Compile
+-------
+$ make
+
+Install
+-------
+$ sudo make install
+(binary will be copied to /usr/bin
+
+
+GETTING STARTED
+===============
+
+usage: atmoslog <options>
+
+options:
+
+  -d              -> daemonize (send program to the background)
+  -h              -> help/show options
+  -i <interval>   -> log interval (default: 30 sec)
+  -l <logfile>    -> log to file
+  -o <offset>     -> offset (calibration adjustment)
+  -v              -> enable verbose/debug logging
+
+For example:
+
+$ sudo /usr/bin/atmoslog -d -i 20 -l /var/lib/atmoslog/atmoslog_data -o -2.73
+
+runs atmoslog in the background with a data refresh interval of 20 seconds,
+a calibration offset of 2.73 degrees less (-2.73) and writes it's data to the
+file "/var/lib/atmoslog/atmoslog_data" (not append!). This option can be used
+with rrdtool to generate some nice graphs.
+
+If you want to capture all data in a file (for spreadsheet imports)
+you can use atmoslog as follows:
+$ sudo /usr/bin/atmoslog > <filename>
+
+note: this program needs to run as root to claim the usb device.
+
+COPYRIGHT
+=========
+
+Copyright (c) 2013 by Joey Loman, <joey@binbash.org>
