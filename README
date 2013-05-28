@@ -12,6 +12,8 @@ for TEMPerHUM devices.
 This program/driver applies to TEMPerHUM USB thermometer devices
 with vendor code "0c45" and product code "7402".
 
+The code is written for Linux.
+
 The difference between this program and others is that it uses
 libusb 1.0 which is more stable then libusb 0.1.
 
